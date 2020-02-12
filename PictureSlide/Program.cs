@@ -20,6 +20,41 @@ namespace PictureSlide
                 pictures.Add(new picture(allLines[i], i-1));
             }
 
+            //Separate Horizontal and vertical photos
+            List<picture> horizonTalPhotos = new List<picture>();
+            List<picture> verticalPhotos = new List<picture>();
+
+            foreach(picture picture in pictures)
+            {
+                if (picture.pictureType == 'H')
+                {
+                    horizonTalPhotos.Add(picture);
+                }
+                else
+                    verticalPhotos.Add(picture);
+            }
+
+            //Sort largest tags to smallest tags in number for both horizontal and vertical
+            horizonTalPhotos = horizonTalPhotos.OrderByDescending(x => x.tags.Count).ToList();
+            verticalPhotos = verticalPhotos.OrderByDescending(x => x.tags.Count).ToList();
+
+        }
+
+        //Method to calculate points
+        public int  points(picture mainPicture, picture targetPic)
+        {
+            List<string> mainPicTags = new List<string>();
+            List<string> targetPicTags = new List<string>();
+            mainPicTags =mainPicture.tags;
+            targetPicTags = targetPic.tags;
+            int matchedCount, unmatchedA, unmatchedB;
+
+            foreach(string tag in mainPicTags)
+            {
+
+            }
+            
+
 
         }
     }
