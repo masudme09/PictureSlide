@@ -60,13 +60,14 @@ namespace PictureSlide
                         //    break;
                         if (Vpic.id != vPic.id)
                         {
-                            //if (maxPoint < points(Vpic, vPic))
-                            //{
-                            //    maxPoint = points(Vpic, vPic);
-                            //    selectedVpic = vPic;
-                            //}
-                            selectedVpic = vPic;
-                            break;
+                            if (points(Vpic, vPic)==0)
+                            {
+                                //maxPoint = points(Vpic, vPic);
+                                selectedVpic = vPic;
+                                break;
+                            }
+                            //selectedVpic = vPic;
+                            //break;
                         }
                         loopCount++;
                     }
@@ -107,39 +108,88 @@ namespace PictureSlide
                 //For maximum point or 500 compare whichever least select a photo for the next slide and move on
                 List<Slide> finalSlidesInOrder = new List<Slide>();
 
-                for (int i = 0; i < Slides.Count; i++)
-                {
-                    Slide slide = new Slide();
-                    slide = Slides[i];
+                //for (int i = 0; i < Slides.Count; i++)
+                //{
+                //    Slide slide = new Slide();
+                //    slide = Slides[i];
 
-                    int mPoint = 0;
-                    int loopCount = 0;
-                    Slide selectedSLide = new Slide();
-                    for (int k = i; k < Slides.Count; k++)
+                //    int mPoint = 0;
+                //    int loopCount = 0;
+                //    Slide selectedSLide = new Slide();
+                //    for (int k = i; k < Slides.Count; k++)
+                //    {
+                //        Slide slide1 = Slides[k];
+                //        //if (mPoint > )
+                //        //    break;
+
+                //        if (slide.id != slide1.id)
+                //        {
+                //            if (mPoint < points(slide, slide1))
+                //            {
+                //                mPoint = points(slide, slide1);
+                //                selectedSLide = slide1;
+                //            }
+                //        }
+                //        loopCount++;
+                //    }
+
+                //    if (mPoint != 0)
+                //    {
+                //        int indexOfCurrentSlide = Slides.IndexOf(slide);
+                //        int indexOfSelectedSlide = Slides.IndexOf(selectedSLide);
+                //        Slides.Remove(selectedSLide);
+                //        Slides.Insert(indexOfCurrentSlide + 1, selectedSLide);
+                //        //finalSlidesInOrder.Add(slide);
+                //        //finalSlidesInOrder.Add(selectedSLide);
+                //    }
+                //}
+                for (int ite = 0; ite < 4; ite++)
+                {
+                    for (int i = 0; i < Slides.Count; i++)
                     {
-                        Slide slide1 = Slides[k];
-                        if (mPoint > 2)
+                        if (Slides.Count < i + 1)
                             break;
 
-                        if (slide.id != slide1.id)
-                        {
-                            if (mPoint < points(slide, slide1))
-                            {
-                                mPoint = points(slide, slide1);
-                                selectedSLide = slide1;
-                            }
-                        }
-                        loopCount++;
-                    }
+                        Slide slide = new Slide();
+                        Slide tempSlide = new Slide();
+                        slide = Slides[i];
 
-                    if (mPoint != 0)
-                    {
-                        int indexOfCurrentSlide = Slides.IndexOf(slide);
-                        int indexOfSelectedSlide = Slides.IndexOf(selectedSLide);
-                        Slides.Remove(selectedSLide);
-                        Slides.Insert(indexOfCurrentSlide + 1, selectedSLide);
-                        //finalSlidesInOrder.Add(slide);
-                        //finalSlidesInOrder.Add(selectedSLide);
+                        //if (points(slide, Slides[i + 1]) > 0 && Slides.Count>i+1)
+                        //{
+                        //    tempSlide = Slides[i + 1];
+                        //    Slides[i + 1] = Slides[i + 2];
+                        //    Slides[i + 2] = tempSlide;
+                        //}else
+                        //{
+                        //int jite = i+1;
+                        //while (points(Slides[i], Slides[jite]) <= ite && Slides.Count > i+3)
+                        //{
+                        //    tempSlide = Slides[i + 1];
+                        //    Slides[i + 1] = Slides[i+3];
+                        //    Slides[jite + 1] = tempSlide;
+                        //    jite++;
+                        //}
+
+                        for (int k = i; k < Slides.Count; k++)
+                        {
+                            Slide slide1 = Slides[k];
+                            //if (mPoint > )
+                            //    break;
+
+                            if (slide.id != slide1.id)
+                            {
+                                if (points(slide, slide1)>ite && Slides.Count>i+2)
+                                {
+                                    tempSlide = Slides[i + 1];
+                                    Slides[i + 1] = slide1;
+                                    Slides[i + 2] = tempSlide;
+                                    break;
+                                }
+                            }
+                            
+                        }
+                        
+
                     }
                 }
 
